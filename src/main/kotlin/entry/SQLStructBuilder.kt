@@ -36,10 +36,11 @@ class SQLStructBuilder : Builder, Consumer<SQLColumnDefinition> {
     }
 
     private fun replaceVarInTag(tag:String, kv: Map<String,String>): String {
+        var newTag = tag
         for(k in kv) {
-            tag.replace("$${k.key}", k.value)
+            newTag = tag.replace("%${k.key}", k.value)
         }
-        return tag
+        return newTag
     }
 
     override fun gen(sql: String): String? {
