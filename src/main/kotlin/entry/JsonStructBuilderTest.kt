@@ -29,7 +29,7 @@ class JsonStructBuilderTest {
         println(result)
         assertEquals(result, """type T struct {
     A    int    `json:"a" bson:"a"`
-    A    string    `json:"A" bson:"A"`
+    A    string    `json:"a" bson:"a"`
 }""")
 
     }

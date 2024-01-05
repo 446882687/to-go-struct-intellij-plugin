@@ -18,6 +18,13 @@ fun String.fmtName(): String {
 fun String.clearName() =
     this.replace("`".toRegex(), "").replace("'".toRegex(), "").replace("\"".toRegex(), "")
 
+fun String.underlineToCamelCase(): String {
+    val str = this.trim()
+    if (str.isEmpty()) return ""
+
+    val st = str.underscoreToCamel()
+    return st[0].toLowerCase() + st.drop(1)
+}
 
 fun String.firstToUpper(): String {
     if (this.isEmpty()) return ""
@@ -31,7 +38,7 @@ fun String.makeTags(tpl: String): String {
     if (tpl.isEmpty()) {
         return ""
     }
-    return "    `" + tpl.replace("%s", this) + "`"
+    return "    `" + tpl.replace("%s", this.underlineToCamelCase()) + "`"
 }
 
 fun String.makeDaoFunc(): String {

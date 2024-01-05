@@ -29,7 +29,10 @@ class SQLStructBuilder : Builder, Consumer<SQLColumnDefinition> {
 
     private fun makeField(name: String, type: String, comment: SQLExpr?): String {
         val originName = name.clearName()
-        val values = mapOf<String,String>("comment" to comment.toString().clearName().replace("\n", " "))
+        val values = mapOf<String, String>(
+            "c" to (comment?.toString() ?: "").clearName().replace("\n", " "),
+            "g" to originName
+        )
         val tag = replaceVarInTag(originName.makeTags(this.tpl), values)
         val commentText = makeComment(comment)
         return "\t${originName.fmtName()}\t$type$tag${commentText}\n"
@@ -38,7 +41,7 @@ class SQLStructBuilder : Builder, Consumer<SQLColumnDefinition> {
     private fun replaceVarInTag(tag:String, kv: Map<String,String>): String {
         var newTag = tag
         for(k in kv) {
-            newTag = tag.replace("%${k.key}", k.value)
+            newTag = newTag.replace("%${k.key}", k.value.ifEmpty { "" })
         }
         return newTag
     }

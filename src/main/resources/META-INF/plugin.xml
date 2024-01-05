@@ -9,8 +9,9 @@
         <h2>Usage</h2>
         <p>Select JSON/SQL right click and select "Convert JSON/SQL To GO"</p>
         <p>Support automatic saving of custom tags</p>
-        <p>Use '%s' as field name in tag template </p>
-        <p>Use '%comment' as field comment in tag template </p>
+        <p>Use '%s' as field name camel case in tag template </p>
+        <p>Use '%c' as field comment in tag template </p>
+        <p>Use '%g' as field name in tag template </p>
 
         <p>Enjoy！</p>
 
